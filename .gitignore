@@ -1,7 +1,13 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+packages/ai-agent/node_modules
+packages/*/node_modules
+node_modules
+apps/*/package-lock.json
+apps/*/pnpm-lock.yaml
+apps/frontend/node_modules
+apps/*/node_modules
 /.pnp
 .pnp.js
 .yarn/install-state.gz
@@ -10,15 +16,15 @@
 /coverage
 
 # next.js
-/.next/
-/out/
+apps/*/.next/
+apps/*/out/
 
 # production
-/build
+apps/*/build
 
 # misc
-.DS_Store
-*.pem
+apps/*/.DS_Store
+apps/*/*.pem
 
 # debug
 npm-debug.log*
@@ -26,11 +32,62 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+apps/*/.env*.local
 .env*.local
-
+.env
+*/.env
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+apps/backend/venv
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+dist/
+build/
+
+# Logs
+logs
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Docker
+docker-compose.override.yml
+
+# Terraform
+*.tfstate
+*.tfstate.backup
+.terraform/

@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AI Learning Platform
+
+This project is an AI-powered learning platform that uses the Socratic method to guide students through their learning journey.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Node.js (v14 or later)
+- Python (v3.9 or later)
+- Docker and Docker Compose
+- pnpm
+
+### Setup
+
+1. Clone the repository
+2. Run the setup script:
+   ```
+   pnpm run setup
+   ```
+
+### Development
+
+To start the development servers:
+
+```
+pnpm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Testing
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To run all tests:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+pnpm test
+```
 
-## Learn More
+### Building and Deployment
 
-To learn more about Next.js, take a look at the following resources:
+To build all packages:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+pnpm run build
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+To start the application using Docker:
 
-## Deploy on Vercel
+```
+pnpm start
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Project Structure
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `apps/`: Contains the main applications (backend and frontend)
+- `packages/`: Contains shared packages and the AI agent
+- `scripts/`: Contains utility scripts for setup and development
+
+## TODO
+
+- [ ] Backend Development
+  - [ ] Design DB tables
+  - [ ] Implement core services
+    - [ ] Auth
+    - [ ] User
+    - [ ] Content
+    - [ ] Learning Path
+    - [ ] Code Execution
+    - [ ] AI Interaction
+- [ ] Frontend Development
+  - [ ] Create main UI components
+  - [ ] Add WebSocket support for realtime feedback
+- [ ] DevOps & Infrastructure
+  - [ ] Set up CI/CD pipeline
+  - [ ] Configure Kubernetes cluster
+- [ ] AI & Learning Features
+
+  - [ ] Integrate AI agent server
+  - [ ] Develop code sandbox/editor
+  - [ ] Implement feedback loop
+  - [ ] Implement student modeling

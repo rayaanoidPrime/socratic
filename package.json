@@ -1,26 +1,23 @@
 {
   "name": "socratic",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "frontend:dev": "cd apps/frontend && pnpm run dev",
+    "frontend:build": "cd apps/frontend && pnpm run build",
+    "backend:dev": "cd apps/backend && python main.py",
+    "dev": "concurrently \"pnpm run frontend:dev\" \"pnpm run backend:dev\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "dependencies": {
-    "react": "^18",
-    "react-dom": "^18",
-    "next": "14.2.10"
+    "concurrently": "^9.0.1"
   },
-  "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.10"
-  }
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
 }

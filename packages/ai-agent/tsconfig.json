@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "module": "nodenext",
+    "strict": true,
+    "moduleResolution": "NodeNext",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "resolveJsonModule": true, // Optional, for resolving JSON files
+    "baseUrl": "." // Base URL for path mapping
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}
