@@ -91,3 +91,5 @@ docker-compose.override.yml
 *.tfstate
 *.tfstate.backup
 .terraform/
+apps/backend/venv
+*/venv/*

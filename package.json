@@ -8,13 +8,18 @@
     "frontend:build": "cd apps/frontend && pnpm run build",
     "backend:dev": "cd apps/backend && python main.py",
     "dev": "concurrently \"pnpm run frontend:dev\" \"pnpm run backend:dev\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "setup": "pnpm run Scripts/setup.sh"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "concurrently": "^9.0.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@langchain/core": "0.1.5"
+    }
   },
   "workspaces": [
     "apps/*",

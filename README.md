@@ -16,7 +16,7 @@ This project is an AI-powered learning platform that uses the Socratic method to
 1. Clone the repository
 2. Run the setup script:
    ```
-   pnpm run setup
+   pnpm Scripts/setup.sh
    ```
 
 ### Development
@@ -24,7 +24,7 @@ This project is an AI-powered learning platform that uses the Socratic method to
 To start the development servers:
 
 ```
-pnpm run dev
+pnpm Scripts/dev.sh
 ```
 
 ### Testing
