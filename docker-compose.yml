@@ -1,29 +1,44 @@
 version: "3"
 services:
   backend:
-    build: ../apps/backend
+    build:
+      context: ./apps/backend
+      dockerfile: Dockerfile
     ports:
       - "8000:8000"
+    volumes:
+      - ./apps/backend:/app
     environment:
-      - DATABASE_URL=postgresql://user:password@db:5432/socratic-db
+      - DATABASE_URL=postgresql://user:password@db:5432/socratic_db
     depends_on:
       - db
+    restart: alwayss
 
-  frontend:
-    build: ../apps/frontend
+  streamlit_app:
+    build:
+      context: ./apps/streamlit_app
+      dockerfile: Dockerfile
+    container_name: streamlit_app
     ports:
-      - "3000:3000"
+      - "8501:8501"
+    volumes:
+      - ./apps/streamlit_app:/app
     depends_on:
       - backend
+    restart: always
 
   db:
-    image: postgres:13
+    image: postgres:15
+    container_name: postgres_db
     environment:
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=socratic-db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: socratic_db
+    ports:
+      - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
+      - pg_data:/var/lib/postgresql/data
+    restart: always
 
 volumes:
-  postgres_data:
+  pg_data:

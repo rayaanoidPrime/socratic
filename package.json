@@ -4,17 +4,28 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "frontend:dev": "cd apps/frontend && pnpm run dev",
-    "frontend:build": "cd apps/frontend && pnpm run build",
-    "backend:dev": "cd apps/backend && python main.py",
-    "dev": "concurrently \"pnpm run frontend:dev\" \"pnpm run backend:dev\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "setup": "sh Scripts/setup.sh",
+    "setup:replit": "sh Scripts/setup_replit.sh",
+    "start:backend": "cd apps/backend/src  && uvicorn main:app --reload",
+    "start:backend:replit": "cd apps/backend && uvicorn main:app --reload",
+    "start:streamlit": "cd apps/streamlit_app && streamlit run app.py",
+    "start:streamlit:replit": "cd apps/streamlit_app && streamlit run app.py",
+    "dev": "concurrently \"pnpm run start:backend\" \"pnpm run start:streamlit\"",
+    "devr": "concurrently \"pnpm run start:backend:replit\" \"pnpm run start:streamlit:replit\""
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "concurrently": "^9.0.1"
+  },
+  "pnpm": {
+    "overrides": {
+      "@langchain/core": "0.1.5"
+    }
   },
   "workspaces": [
     "apps/*",

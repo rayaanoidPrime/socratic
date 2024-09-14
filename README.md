@@ -1,6 +1,6 @@
-# AI Learning Platform
+# Socratic Learning
 
-This project is an AI-powered learning platform that uses the Socratic method to guide students through their learning journey.
+This project is an AI-powered learning platform that uses the Socratic method to guide students through their learning journey. It includes a FastAPI backend, a Streamlit app for the frontend, and an AI agent service integrated into the backend.
 
 ## Getting Started
 
@@ -11,27 +11,70 @@ This project is an AI-powered learning platform that uses the Socratic method to
 - Docker and Docker Compose
 - pnpm
 
-### Setup
+## Installation and Running
 
-1. Clone the repository
-2. Run the setup script:
+### Clone the repository:
+
+```bash
+git clone <repository-url>
+cd socratic
+```
+
+### Option 1: With Docker
+
+1. Build and run the Docker services:
+
+   ```bash
+   docker-compose up --build
    ```
+
+   This command will build the Docker images and start the containers for the backend, Streamlit app, and PostgreSQL database. The services will be accessible on their respective ports (8000 for backend, 8501 for Streamlit, and 5432 for PostgreSQL).
+
+### Option 2: Without Docker
+
+1. Create a virtual environment:
+
+   - Create a virtual environment:
+     ```bash
+     python -m venv venv
+     ```
+   - Activate the virtual environment:
+     - On Windows:
+       ```bash
+       .\venv\Scripts\activate
+       ```
+     - On macOS and Linux:
+       ```bash
+       source venv/bin/activate
+       ```
+
+2. Install project dependencies (only for frontend dir not streamlit):
+
+   ```bash
+   pnpm install
+   ```
+
+3. Run the setup script:
+
+   ```bash
    pnpm run setup
    ```
 
-### Development
+4. Start the backend and streamlit servers:
 
-To start the development servers:
+   ```bash
+   pnpm run dev
+   ```
 
-```
-pnpm run dev
-```
+## Development
+
+To start the development servers manually without Docker, use the commands provided in Option 2. This will start the backend server and the Streamlit app independently.
 
 ### Testing
 
 To run all tests:
 
-```
+```bash
 pnpm test
 ```
 
@@ -39,93 +82,57 @@ pnpm test
 
 To build all packages:
 
-```
+```bash
 pnpm run build
 ```
 
-To start the application using Docker:
-
-```
-pnpm start
-```
+To start the application using Docker, follow the instructions in Option 1.
 
 ## Project Structure
 
-- `apps/`: Contains the main applications (backend and frontend)
-- `packages/`: Contains shared packages and the AI agent
-- `scripts/`: Contains utility scripts for setup and development
+- `apps/`: Contains the main applications (backend and Streamlit app).
+- `scripts/`: Contains utility scripts for setup and development.
+- `docker-compose.yml`: Docker Compose configuration for managing multi-container Docker applications.
 
 ### Directory Structure
 
-- **`apps/`**: Contains the main applications for your project.
+```plaintext
+├── apps
+│   ├── backend               # FastAPI backend
+│   │   ├── alembic           # Alembic migrations
+│   │   ├── socratic_agent    # AI agent package integrated in the backend
+│   │   ├── src               # Backend source code
+│   │   │   └── main.py       # Entry point for FastAPI app
+│   │   ├── tests             # Backend test cases
+│   │   └── Dockerfile        # Backend Dockerfile
+│   ├── streamlit_app         # Streamlit frontend
+│   │   ├── app.py            # Streamlit app entry point
+│   │   └── Dockerfile        # Streamlit Dockerfile
+│   └── frontend (nextjs)     # Frontend in nextjs
+|
+├── public                    # Static assets
+├── scripts                   # Utility scripts
+│   ├── setup.sh              # Setup script
+│   └── dev.sh                # Development script
+├── docker-compose.yml         # Docker Compose configuration
+└── README.md                 # Project documentation
+```
 
-  - **`backend/`**: Contains the backend service code.
-    - `src/`: The source code for the backend.
-      - `api/`: API route definitions.
-      - `services/`: Business logic or services.
-      - `models/`: Data models.
-      - `utils/`: Utility functions.
-      - `main.py`: The entry point for the backend application.
-    - `tests/`: Backend test cases.
-    - `Dockerfile`: Docker configuration for the backend.
-    - `requirements.txt`: Python package dependencies.
-    - `pyproject.toml`: Python project configuration.
-  - **`frontend/`**: Contains the frontend service code.
-    - `src/`: The source code for the frontend.
-      - `components/`: React components.
-      - `pages/`: Page components.
-      - `styles/`: CSS or styled components.
-      - `utils/`: Utility functions.
-      - `App.tsx`: The main React component.
-    - `public/`: Static assets.
-    - `tests/`: Frontend test cases.
-    - `Dockerfile`: Docker configuration for the frontend.
-    - `package.json`: Node.js package dependencies.
-    - `tsconfig.json`: TypeScript configuration.
+### Services
 
-- **`packages/`**: Contains shared or additional packages.
+1. **Backend**: The backend service (FastAPI) manages the core functionality, including AI interactions, database connections, and API routes.
+2. **Streamlit App**: The frontend is powered by Streamlit for quick UI rendering and user interaction.
+3. **Socratic Agent**: Integrated as part of the backend, the AI agent provides intelligent interactions and helps users learn through guided questions.
 
-  - **`ai-agent/`**: AI-related package with its own source code.
-    - `src/`: Source code for the AI agent.
-      - `llm/`: Language model related code.
-      - `rag/`: Retrieval-augmented generation code.
-      - `workflows/`: Workflow definitions.
-      - `index.ts`: Entry point for the AI agent package.
-    - `tests/`: Tests for the AI agent package.
-    - `package.json`: Node.js package dependencies.
-    - `tsconfig.json`: TypeScript configuration.
-  - **`shared/`**: Contains shared utilities or types.
-    - `src/`: Source code for shared components.
-      - `types/`: Shared TypeScript types.
-      - `utils/`: Shared utility functions.
-    - `package.json`: Node.js package dependencies.
-    - `tsconfig.json`: TypeScript configuration.
-
-- **`docker-compose.yml`**: Docker Compose configuration for managing multi-container Docker applications.
-
-- **`scripts/`**: Contains shell scripts for setup and development.
-
-  - `setup.sh`: Setup script for the project.
-  - `dev.sh`: Development script.
-
-- **`.gitignore`**: Specifies files and directories to ignore in Git.
-
-- **`README.md`**: Project documentation and overview.
-
-- **`package.json`**: Root Node.js package configuration (likely for managing shared dependencies).
-
-- **`tsconfig.json`**: Root TypeScript configuration (likely for shared TypeScript settings).
-
-## Services
-
-### AI Agent flow
+### AI Agent Flow
 
 ![AI Agent Architecture](./public/ai-arch.png)
 
 ## TODO
 
-- [ ] Backend Development
-  - [ ] Design DB tables
+- **Backend Development**
+
+  - [ ] Design database tables
   - [ ] Implement core services
     - [ ] Auth
     - [ ] User
@@ -133,14 +140,19 @@ pnpm start
     - [ ] Learning Path
     - [ ] Code Execution
     - [ ] AI Interaction
-- [ ] Frontend Development
+
+- **Streamlit App Development**
+
   - [ ] Create main UI components
-  - [ ] Add WebSocket support for realtime feedback
-- [ ] DevOps & Infrastructure
+  - [ ] Add WebSocket support for real-time feedback
+
+- **DevOps & Infrastructure**
+
   - [ ] Set up CI/CD pipeline
   - [ ] Configure Kubernetes cluster
-- [ ] AI & Learning Features
+  - [ ] Monitor services
 
+- **AI & Learning Features**
   - [ ] Integrate AI agent server
   - [ ] Develop code sandbox/editor
   - [ ] Implement feedback loop

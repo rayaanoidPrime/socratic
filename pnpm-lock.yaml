@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  '@langchain/core': 0.1.5
+
 dependencies:
   concurrently:
     specifier: ^9.0.1

@@ -18,43 +18,30 @@ if ! command -v pnpm &> /dev/null; then
     exit 1
 fi
 
-
 # Install dependencies for all workspace packages
 print_msg "Installing all workspace dependencies..."
 pnpm install
 print_msg "Dependencies installed!"
 
-print_msg "Setting up virtual environment..."
-if [ ! -d "venv" ]; then
-  python -m venv venv
-  print_msg "Virtual environment created!"
-else
-  print_msg "Virtual environment already exists, skipping creation."
-fi
-. venv/Scripts/activate
+# Setup backend
+print_msg "Setting up backend..."
+cd apps/backend
+
 # Ensure pip does not use the --user flag
 export PIP_USER=false
 
-# Setup backend (ensure virtual environment is activated)
-print_msg "Setting up backend..."
-
-cd apps/backend
 pip install --no-cache-dir -r requirements.txt
 print_msg "Backend setup complete!"
-
 cd ../..
 
 # Setup Streamlit app
 print_msg "Setting up Streamlit app..."
 cd apps/streamlit_app
-
 pip install --no-cache-dir -r requirements.txt
-print_msg "Backend setup complete!"
-deactivate  # Deactivate the virtual environment
+print_msg "Streamlit app setup complete!"
 cd ../..
 
-
+# Print completion message
 print_msg "Setup Completed!"
 
 print_msg "run Scripts/dev.sh to start the development environment"
-# wait  # Wait for background processes to finish
